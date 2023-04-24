@@ -21,18 +21,12 @@ const dbInstance = collection(firebaseDB, "notes");
 export default function NoteOperations(props: {
   getSingleNote: (id: string) => void;
 }) {
-  const [isInputVisible, setInputVisible] = useState(false);
   const [noteTitle, setNoteTitle] = useState("");
-
   const [noteDesc, setNoteDesc] = useState("");
   const [notesArray, setNotesArray] = useState<RNote>([]);
 
   const addDesc = (value: SetStateAction<string>) => {
     setNoteDesc(value);
-  };
-
-  const inputToggle = () => {
-    setInputVisible(!isInputVisible);
   };
 
   const saveNote = () => {
@@ -42,7 +36,6 @@ export default function NoteOperations(props: {
     }).then(() => {
       setNoteTitle("");
       setNoteDesc("");
-      getNotes();
     });
   };
 
@@ -72,44 +65,30 @@ export default function NoteOperations(props: {
   }, []);
 
   const styles = {
-    button: "w-60 h-8 cursor-pointer bg-red-500 text-white border-[]",
+    button: "w-full h-8 cursor-pointer bg-indigo-500 text-white border-[]",
   };
 
   return (
     <>
-      <div className="">
-        <button onClick={inputToggle} className={`${styles.button}`}>
-          Add a New Note
-        </button>
-      </div>
-
-      {isInputVisible ? (
-        <div className="">
-          <input
-            className="w-60 h-8 border mx-0 my-[5px] rounded-[5px] border-solid border-gray-300"
-            placeholder="Enter the Title.."
-            onChange={(e) => setNoteTitle(e.target.value)}
-            value={noteTitle}
-          />
-        </div>
-      ) : (
-        <></>
-      )}
-
-      <div className="w-60">
+      <input
+        className="w-full h-8 border mx-0 my-[5px] rounded-[5px] border-solid border-gray-300"
+        placeholder="enter a title.."
+        onChange={(e) => setNoteTitle(e.target.value)}
+        value={noteTitle}
+      />
+      <div className="w-full">
         <ReactQuill theme="snow" onChange={addDesc} value={noteDesc} />
       </div>
-
       <button onClick={saveNote} className={`${styles.button}`}>
         Save Note
       </button>
 
-      <div className="">
+      <div className="w-full">
         {notesArray.map((note) => {
           return (
             <div
               key={note.id}
-              className="border border-red-600 w-60 text-center cursor-pointer mt-2 rounded-[10px] border-solid"
+              className="w-full border border-indigo-400 text-center cursor-pointer mt-2 rounded-[10px] border-solid"
               onClick={() => props.getSingleNote(note.id)}
             >
               <h4>{note.noteTitle}</h4>
@@ -122,3 +101,50 @@ export default function NoteOperations(props: {
     </>
   );
 }
+
+// function NotesList(props: { getSingleNote: (id: string) => void }) {
+//   const [notesArray, setNotesArray] = useState<RNote>([]);
+
+//   const getNotes = () => {
+//     getDocs(dbInstance).then((data: QuerySnapshot<DocumentData>) => {
+//       const dataArray: RNote = data.docs.map((item) => {
+//         const itemData = item.data();
+//         const itemDataAny: any = itemData;
+//         const noteTitle: string = itemDataAny.noteTitle;
+//         const noteDesc: string = itemDataAny.noteDesc;
+//         // const noteData = {
+//         //   noteTitle: noteTitle,
+//         //   noteDesc: noteDesc
+//         // }
+
+//         // console.log(itemData, noteTitle, noteDesc, item.id);
+
+//         return { noteTitle: noteTitle, noteDesc: noteDesc, id: item.id };
+//       });
+
+//       setNotesArray(dataArray);
+//     });
+//   };
+
+//   useEffect(() => {
+//     getNotes();
+//   }, []);
+
+//   return (
+//     <div className="">
+//       {notesArray.map((note) => {
+//         return (
+//           <div
+//             key={note.id}
+//             className="w-full border border-red-600 text-center cursor-pointer mt-2 rounded-[10px] border-solid"
+//             onClick={() => props.getSingleNote(note.id)}
+//           >
+//             <h4>{note.noteTitle}</h4>
+//             {/* <p>{note.noteDesc}</p> */}
+//             {/* <p dangerouslySetInnerHTML={{ __html: note.noteDesc }}></p> */}
+//           </div>
+//         );
+//       })}
+//     </div>
+//   );
+// }

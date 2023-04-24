@@ -79,7 +79,7 @@ export default function NoteDetails(props: { ID: string | null }) {
 
   return (
     <>
-      <div>
+      <div className="w-full h-8 text-center">
         <button
           className="w-20 h-8 bg-[rgb(119,27,27)] cursor-pointer ml-0 mr-2.5 my-2.5 border-[none]"
           onClick={getEditData}
@@ -95,7 +95,7 @@ export default function NoteDetails(props: { ID: string | null }) {
       </div>
 
       {isEdit ? (
-        <div className="">
+        <div className="w-full h-8 text-center">
           <input
             className="w-60 h-8 border mx-0 my-[5px] rounded-[5px] border-solid border-"
             placeholder="Enter the Title.."
@@ -117,10 +117,10 @@ export default function NoteDetails(props: { ID: string | null }) {
       )}
 
       {singleNote != undefined ? (
-        <>
-          <h2>{singleNote.noteTitle}</h2>
+        <div className="w-full h-8 text-center mt-4">
+          <h2 className="font-bold text-lg">{singleNote.noteTitle}</h2>
           <div dangerouslySetInnerHTML={{ __html: singleNote.noteDesc }}></div>
-        </>
+        </div>
       ) : (
         <>No notes selected ...</>
       )}
