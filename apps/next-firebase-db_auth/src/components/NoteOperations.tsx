@@ -36,6 +36,7 @@ export default function NoteOperations(props: {
     }).then(() => {
       setNoteTitle("");
       setNoteDesc("");
+      getNotes();
     });
   };
 
