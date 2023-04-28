@@ -16,15 +16,16 @@ export default function Home() {
     <>
       <HeadCompnent />
       <main
-        className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}
+        className={`flex min-h-screen items-center content-center p-6 ${inter.className}`}
       >
         {/* <h1 className="text-3xl font-bold underline text-red-400">Notes!</h1> */}
 
-        <div className="flex flex-row justify-between p-4 w-full h-[calc(100vh_-_4rem)]">
-          <div className="w-80 md:w-1/2">
+        <div className="flex flex-col-reverse md:flex-row justify-start w-full content-center p-2">
+        {/* h-[calc(100vh_-_4rem)] */}
+          <div className="md:w-1/2 md:px-6">
             <NoteOperations getSingleNote={getSingleNote} />
           </div>
-          <div className="w-80 md:w-1/2">
+          <div className="pb-8 md:w-1/2 md:px-6">
             <NoteDetails ID={id} />
           </div>
         </div>

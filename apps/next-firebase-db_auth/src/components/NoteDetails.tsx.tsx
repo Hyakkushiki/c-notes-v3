@@ -78,16 +78,16 @@ export default function NoteDetails(props: { ID: string | null }) {
   }, [props.ID]);
 
   return (
-    <>
-      <div className="w-full h-8 text-center">
+    <div className="flex flex-col w-full">
+      <div className="w-full text-center">
         <button
-          className="w-20 h-8 bg-[rgb(119,27,27)] cursor-pointer ml-0 mr-2.5 my-2.5 border-[none]"
+          className="w-20 h-8 bg-blue-400 cursor-pointer ml-0 mr-2.5 my-2.5 border-[none] rounded-[8px]"
           onClick={getEditData}
         >
           Edit
         </button>
         <button
-          className="w-20 h-8 bg-[rgb(119,27,27)] cursor-pointer ml-0 mr-2.5 my-2.5 border-[none]"
+          className="w-20 h-8 bg-red-400 cursor-pointer ml-0 mr-2.5 my-2.5 border-[none] rounded-[8px]"
           onClick={() => deleteNote(singleNote.id)}
         >
           Delete
@@ -95,7 +95,7 @@ export default function NoteDetails(props: { ID: string | null }) {
       </div>
 
       {isEdit ? (
-        <div className="w-full h-8 text-center">
+        <div className="w-full text-center">
           <input
             className="w-60 h-8 border mx-0 my-[5px] rounded-[5px] border-solid border-"
             placeholder="Enter the Title.."
@@ -117,13 +117,16 @@ export default function NoteDetails(props: { ID: string | null }) {
       )}
 
       {singleNote != undefined ? (
-        <div className="w-full h-8 text-center mt-4">
+        <div className="w-full text-center border border-blue-400 text-center mt-1 rounded-[10px] border-dashed">
           <h2 className="font-bold text-lg">{singleNote.noteTitle}</h2>
-          <div dangerouslySetInnerHTML={{ __html: singleNote.noteDesc }}></div>
+          <div
+            className="mt-4"
+            dangerouslySetInnerHTML={{ __html: singleNote.noteDesc }}
+          ></div>
         </div>
       ) : (
         <>No notes selected ...</>
       )}
-    </>
+    </div>
   );
 }
