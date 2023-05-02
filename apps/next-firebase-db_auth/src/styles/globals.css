@@ -25,3 +25,13 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+/* this targets the editing area in ReactQuill */
+.ql-editor {
+  overflow-y: scroll;
+  resize: vertical;
+  /* background: blue; */
+  border-width: 0px;
+  border-color: transparent;
+  min-height: 18em;
+}
